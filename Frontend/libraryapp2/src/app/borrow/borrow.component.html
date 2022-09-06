@@ -1,0 +1,99 @@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <a class="navbar-brand" style="color:white;">Ödünç Yönetim</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+     <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+           <a class="nav-link" (click)="onOpenModal(null, 'add')">Yeni Ödünç İşlemi  <span class="sr-only">(current)</span></a>
+        </li>
+     </ul>
+     
+  </div>
+</nav>
+<br><br>
+<div  class="container" id="main-container">
+	<div class="row">
+		
+        
+        <div class="col-md-12">
+        <h4>Ödünç Bilgileri</h4>
+        <div class="table-responsive"> </div>
+
+                
+        <table id="mytable" class="table table-bordred table-striped" style="width:100%">
+                        
+            <thead>
+                <tr>
+                  
+                    <th>Ödünç Alan Üye</th>
+                    <th>Ödünç Alınan Kitap</th>
+                    <th>Ödünç Tarihi</th>
+                    <th>Geri Getirilmesi Gereken Tarih</th>
+                    <th>Düzenle</th>
+                    <th>Sil</th>
+
+                    
+                </tr>
+            </thead>
+            <tbody *ngFor="let borrow of borrows" >
+                
+                    <tr>
+                    
+                        <td>{{borrow?.member_name}}</td>
+                        <td>{{borrow?.book_name}}</td>
+                        <td>{{borrow?.borrowDate}}</td>
+                        <td>{{borrow?.expectedReturnDate}}</td>
+                    
+                        <td>  <a class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
+                        <td><a  class="btn btn-danger tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
+                    </tr>
+                
+
+            
+            </tbody>
+                
+        </table>
+	</div>
+</div>
+
+
+<!-- Add Borrow Modal -->
+<div class="modal fade" id="addBorrowModal" tabindex="-1" role="dialog" aria-labelledby="addBorrowModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+     <div class="modal-header">
+         <h5 class="modal-title" id="addBorrowModalLabel">Add Borrow</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+     </div>
+     <div class="modal-body">
+         <form #addForm="ngForm" (ngSubmit)="onAddBorrow(addForm)">
+         <div class="form-group">
+           <label for="member_id">Member Id</label>
+           <input type="number" ngModel name="member_id" class="form-control" id="Member_id" placeholder="member_id" required>
+         </div>
+         <div class="form-group">
+           <label for="book_i">Book Id</label>
+           <input type="number" ngModel name="book_i" class="form-control" id="Book_i" placeholder="book_i" required>
+         </div>
+         <div class="modal-footer">
+           <button type="button" id="add-borrow-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button  type="submit" class="btn btn-primary" >Save changes</button>
+         </div>
+         
+         </form>
+      </div>
+   </div>
+</div>

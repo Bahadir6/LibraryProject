@@ -1,0 +1,123 @@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <a class="navbar-brand" style="color:white;">Kitap Yönetim</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+     <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+           <a class="nav-link" (click)="onOpenModal(null, 'add')">Yeni Kitap Ekle <span class="sr-only">(current)</span></a>
+        </li>
+     </ul>
+     
+  </div>
+</nav>
+
+<br><br>
+<div  class="container" id="main-container">
+	<div class="row">
+    
+        
+        <div class="col-md-12">
+        <h4>Kütüphanedeki Kitaplar</h4>
+      
+       
+        <div class="table-responsive"> </div>
+
+                
+        <table id="mytable" class="table table-bordred table-striped" style="width:100%">
+                        
+            <thead>
+              
+              
+                <tr>
+                    <th>Id</th>
+                    <th>Kitap İsmi</th>
+                    <th>Yazar</th>
+                    <th>Tür</th>
+                    <th>İlk Basım Yılı</th>
+                    <th>ISBN</th>
+                    <th>Müsaitlik Durumu</th>
+                    <th>Düzenle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let book of books" >
+              
+                
+                    <tr>
+                    
+                        <td>{{book?.id}}</td>
+                        <td>{{book?.title}}</td>
+                        <td>{{book?.author}}</td>
+                        <td>{{book?.typeofBook}}</td>
+                        <td>{{book?.firstPublicYear}}</td>
+                        <td>{{book?.isbn}}</td>
+                        <td>{{book?.available}}</td>
+                        
+                        <td>  <a class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a></td>
+                        <td><a class="btn btn-danger tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
+                    </tr>
+            </tbody>            
+        </table>
+	</div>
+</div>
+
+
+
+
+ <!-- Add Book Modal -->
+ <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="addBookModalLabel" aria-hidden="true" >
+     <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addBookModalLabel">Add Book</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form #addForm="ngForm" (ngSubmit)="onAddBook(addForm)">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" ngModel name="title" class="form-control" id="Title" placeholder="title" required>
+            </div>
+            <div class="form-group">
+              <label for="author">Author</label>
+              <input type="text" ngModel name="author" class="form-control" id="Author" placeholder="author" required>
+            </div>
+            <div class="form-group">
+              <label for="typeofBook">TypeofBook</label>
+              <input type="text" ngModel name="typeofBook" class="form-control" id="TypeofBook" placeholder="typeofBook" required>
+            </div>
+            <div class="form-group">
+              <label for="firstPublicYear">FirstPublicYear</label>
+              <input type="text" ngModel name="firstPublicYear" class="form-control" id="firstPublicYear" placeholder="FirstPublicYear" required>
+            </div>
+            <div class="form-group">
+              <label for="isbn">Isbn</label>
+              <input type="text" ngModel name="isbn" class="form-control" id="isbn" placeholder="Isbn" required>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="add-book-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button  type="submit" class="btn btn-primary" >Save changes</button>
+            </div>
+            
+            </form>
+         </div>
+      </div>
+  </div>
+  
+
+
+
+   
